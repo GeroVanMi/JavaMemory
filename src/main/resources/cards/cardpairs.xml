@@ -1,0 +1,92 @@
+<cardpairs>
+    <pair>
+        <title>Katalonien</title>
+        <text>Seit dem 27. Oktober 2017 will die Provinz Katalonien ihre Unabhängigkeit und sich somit vom Rest von Spanien trennen.</text>
+        <path>katalonien.png</path>
+    </pair>
+    <pair>
+        <title>Brexit</title>
+        <text>Mit dem Begriff «Brexit» ist der Ausstieg Grossbritanniens aus der Europäischen Union gemeint. Die Mehrheit der Wähler stimmte am 23. Juni 2016 dafür.</text>
+        <path>brexit.png</path>
+    </pair>
+    <pair>
+        <title>Jacob Zuma</title>
+        <text>Gut neun Jahre lang war Jacob Zuma Präsident der Republik Südafrika. Doch wegen Korruptionsbeschuldigungen musste er sein Amt abgeben.</text>
+        <path>jacobzuma.png</path>
+    </pair>
+    <pair>
+        <title>Libyen</title>
+        <text>Seit dem Sturz des libysche Diktator Gaddafi herrscht in Libyen Bürgerkrieg. Unterschiedliche Gruppen kämpfen darum, wer Gaddafis Nachfolger sein soll.</text>
+        <path>libyen.png</path>
+    </pair>
+    <pair>
+        <title>Recep Tayyip Erdoğan</title>
+        <text>Am 10. August 2014 wurde Erdoğan politisch zum Präsidenten der Türkei gewählt. Seitdem praktiziert er in der Türkei eine Diktatur.</text>
+        <path>erdogan.png</path>
+    </pair>
+    <pair>
+        <title>Nicolás Maduro</title>
+        <text>Der venezolanische Präsident wird für Mängel an Nahrungsmittel und Geld verantwortlich gemacht. Dies, obwohl Venezuela weltweit am meisten Öl besitzt.</text>
+        <path>maduro.png</path>
+    </pair>
+    <pair>
+        <title>Handelskrieg</title>
+        <text>Die Stahl- und Aluminiumproduktion der USA leidet an der Konkurrenz des Auslandes. Darum hat Donald Trump beschossen Schutzzölle zu errichten.</text>
+        <path>handelskrieg.png</path>
+    </pair>
+    <pair>
+        <title>Jerusalem</title>
+        <text>Jerusalem wurde vom US-Präsident als Hauptstadt Israels anerkannt. Viellicht wird das den Krieg zwischen Israelis und Palästinensern schlichten können</text>
+        <path>jerusalem.png</path>
+    </pair>
+    <pair>
+        <title>Krim</title>
+        <text>Das Volk der Halbinsel und autonomen Republik ist gespalten. Die einen wollen, dass sich die Krim der EU, die anderen wollen sich Russland anschliessen.</text>
+        <path>krim.png</path>
+    </pair>
+    <pair>
+        <title>Chemnitz</title>
+        <text>In der deutschen Stadt marschieren Rechtsextremen lautstark auf. Der Auslöser war eine tödliche Messerstecherei einer Gruppe Flüchtlinge gegen Deutsche.</text>
+        <path>chemnitz.png</path>
+    </pair>
+    <pair>
+        <title>Verhältnis Nordkorea und USA</title>
+        <text>Im Juni 2018 gab es ein Gipfeltreffen zwischen USA und Nordkorea. Dabei willigte Nordkorea auf eine komplette Denuklearisierung ein. </text>
+        <path>usakorea.png</path>
+    </pair>
+    <pair>
+        <title>Verhältnis Nordkorea und China</title>
+        <text>Im Mai 2018 gab es ein Treffen zwischen Nordkorea und China. Hauptthemen waren Denuklearisierung und gemeinsame Interessen</text>
+        <path>chinakorea.png</path>
+    </pair>
+    <pair>
+        <title>Frankreich</title>
+        <text>Überall wird von Leuten in gelben Westen demonstrieret. Sie fordern den Rücktritt ihres Präsidenten. Der Auslöser dafür war eine erhöhte Abgabe auf Treibstoff.</text>
+        <path>frankreich.png</path>
+    </pair>
+    <pair>
+        <title>Neuwahlen Malediven</title>
+        <text>Oppositionskandidat Ibrahim Mohammed Solih gewann überraschend die Präsidentschaftswahl gegen den autoritär herrschenden Abdul Yameen.</text>
+        <path>malediven.png</path>
+    </pair>
+    <pair>
+        <title>Wüstenwachstum</title>
+        <text>Die Wüsten der Erde breiten sich aus. Dies hat verehrende Folgen für den Mensch und seine Umwelt. Zur Bekämpfung werden Millionen Bäume gepflanzt.</text>
+        <path>wuestenwachstum.png</path>
+    </pair>
+    <pair>
+        <title>Roboter</title>
+        <text>Mit der Digitalisierung werden auch Roboter immer aktueller. Doch welche Chancen und Risiken damit erschaffen werden, lässt sich erst in ferner Zukunft sagen.</text>
+        <path>roboter.png</path>
+    </pair>
+    <pair>
+        <title>Klimawandel</title>
+        <text>Hitzesommer wie 2018 einer war, wird keine Seltenheit mehr bleiben. Grund dafür ist er Klimawandel. Auch andere extreme Wetterlagen werden Folgen sein.</text>
+        <path>klimawandel.png</path>
+    </pair>
+    <pair>
+        <title>Krebs</title>
+        <text>Trotz moderner Technologie ist Krebs die häufigste Todesursache. Mit rosafarbenen Schleifen soll besonders auf Brustkrebs aufmerksam gemacht werden</text>
+        <path>krebs.png</path>
+    </pair>
+</cardpairs>

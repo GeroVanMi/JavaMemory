@@ -1,0 +1,27 @@
+.coveredCard {
+    -fx-background-color: linear-gradient(rgb(100, 100, 100), rgb(120, 120, 120));
+}
+
+.coveredCard:hover {
+    -fx-background-color: linear-gradient(rgb(160, 160, 160), rgb(140, 140, 140));
+}
+
+.disarmedCard {
+    -fx-background-color: linear-gradient(rgba(100, 100, 100, 0.4), rgba(120, 120, 120, 0.4));
+}
+
+#cardText {
+    -fx-font-size: 7pt;
+}
+
+#disabledButton {
+    -fx-background-color: transparent;
+}
+
+.label{
+    -fx-text-fill: rgb(200, 200, 200);
+}
+
+.button {
+    -fx-text-fill: rgb(200, 200, 200);
+}

@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Memory">
+    <output-path>$PROJECT_DIR$/out/artifacts/Memory</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="client.Memory" />
+        <option name="description" value="" />
+        <option name="height" value="800" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Memory" />
+        <option name="vendor" value="KBW" />
+        <option name="version" value="" />
+        <option name="width" value="1200" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Memory.jar">
+        <element id="module-output" name="Memory" />
+      </element>
+    </root>
+  </artifact>
+</component>
