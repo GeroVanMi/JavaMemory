@@ -49,97 +49,101 @@ public class GameController extends ViewController {
 
     @Override
     public void processCommand(String command, String[] parameters) {
-        switch (command) {
-            case "GAMEINIT":
-                XMLFileReader xmlReader = new XMLFileReader("/cards/cardpairs.xml");
-                this.pairs = xmlReader.getPairs();
-                Random random = new Random(Integer.parseInt(parameters[0]));
-                this.distributeCards(random);
-                Platform.runLater(() -> {
-                    if (parameters[1].equals(getScreenController().getClient().getName())) {
-                        labelMyName.setText(parameters[1]);
-                        labelOpponentName.setText(parameters[2]);
-                    } else {
-                        labelMyName.setText(parameters[2]);
-                        labelOpponentName.setText(parameters[1]);
-                    }
-                });
-                this.sendCommand("GAMEINITCONFIRM", "");
-                break;
-            case "YOURTURN":
-                firstCardPicked = false;
-                this.firstCard = null;
-                this.secondCard = null;
-                this.coverCards();
-                for (Node child : playground.getChildren()) {
+        try {
+            switch (command) {
+                case "GAMEINIT":
+                    XMLFileReader xmlReader = new XMLFileReader("/cards/cardpairs.xml");
+                    this.pairs = xmlReader.getPairs();
+                    Random random = new Random(Integer.parseInt(parameters[0]));
+                    this.distributeCards(random);
                     Platform.runLater(() -> {
-                        child.getStyleClass().clear();
-                        child.getStyleClass().add("coveredCard");
-                        if (child instanceof Button) {
-                            Button button = (Button) child;
-                            button.setDisable(false);
+                        if (parameters[1].equals(getScreenController().getClient().getName())) {
+                            labelMyName.setText(parameters[1]);
+                            labelOpponentName.setText(parameters[2]);
+                        } else {
+                            labelMyName.setText(parameters[2]);
+                            labelOpponentName.setText(parameters[1]);
                         }
                     });
-                }
-                break;
-            case "NOTYOURTURN":
-                this.firstCard = null;
-                this.secondCard = null;
-                for (Node child : playground.getChildren()) {
-                    Platform.runLater(() -> {
-                        child.getStyleClass().clear();
-                        child.getStyleClass().add("disarmedCard");
-                    });
-                }
-                this.disableButtons();
-                this.coverCards();
+                    this.sendCommand("GAMEINITCONFIRM", "");
+                    break;
+                case "YOURTURN":
+                    firstCardPicked = false;
+                    this.firstCard = null;
+                    this.secondCard = null;
+                    this.coverCards();
+                    for (Node child : playground.getChildren()) {
+                        Platform.runLater(() -> {
+                            child.getStyleClass().clear();
+                            child.getStyleClass().add("coveredCard");
+                            if (child instanceof Button) {
+                                Button button = (Button) child;
+                                button.setDisable(false);
+                            }
+                        });
+                    }
+                    break;
+                case "NOTYOURTURN":
+                    this.firstCard = null;
+                    this.secondCard = null;
+                    for (Node child : playground.getChildren()) {
+                        Platform.runLater(() -> {
+                            child.getStyleClass().clear();
+                            child.getStyleClass().add("disarmedCard");
+                        });
+                    }
+                    this.disableButtons();
+                    this.coverCards();
 
-                break;
-            case "SHOWCARD":
-                int row = Integer.parseInt(parameters[0]);
-                int col = Integer.parseInt(parameters[1]);
-                int pos = Integer.parseInt(parameters[2]);
-                uncoverCard(row, col, pos);
-                break;
-            case "ENEMYSCORED":
-                enemyPointsCounter++;
-                Platform.runLater(() -> {
-                    enemyPoints.setText("Points: " + enemyPointsCounter);
-                    removeCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
-                    removeCard(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
-                });
-                break;
-            case "ENEMYLEFT":
-                Platform.runLater(() -> {
-                    InfoBox infoBox = new InfoBox("Gegner verloren", "Dein Gegner hat das Spiel verlassen.");
-                    infoBox.showAndWait();
-                    sendCommand("GAMEOVERCONFIRM", "");
-                    this.leaveGame();
-                });
-                break;
-            case "GAMELOST":
-                Platform.runLater(() -> {
-                    InfoBox infoBox = new InfoBox("Niederlage!", "Du hast das Spiel verloren.");
-                    Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
-                            myPointsCounter + " zu " + enemyPointsCounter + " verloren.");
-                    content.setWrapText(true);
-                    infoBox.add(content);
-                    infoBox.showAndWait();
-                    sendCommand("GAMEOVERCONFIRM", "");
-                });
-                break;
-            case "GAMEWON":
-                Platform.runLater(() -> {
-                    InfoBox infoBox = new InfoBox("Sieg!", "Du hast das Spiel gewonnen!");
-                    Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
-                            myPointsCounter + " zu " + enemyPointsCounter + " gewonnen.");
-                    content.setWrapText(true);
-                    infoBox.add(content);
-                    infoBox.showAndWait();
-                    sendCommand("GAMEOVERCONFIRM", "");
-                    getScreenController().loadContent("/fxml/startpage.fxml");
-                });
-                break;
+                    break;
+                case "SHOWCARD":
+                    int row = Integer.parseInt(parameters[0]);
+                    int col = Integer.parseInt(parameters[1]);
+                    int pos = Integer.parseInt(parameters[2]);
+                    uncoverCard(row, col, pos);
+                    break;
+                case "ENEMYSCORED":
+                    enemyPointsCounter++;
+                    Platform.runLater(() -> {
+                        enemyPoints.setText("Points: " + enemyPointsCounter);
+                        removeCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+                        removeCard(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
+                    });
+                    break;
+                case "ENEMYLEFT":
+                    Platform.runLater(() -> {
+                        InfoBox infoBox = new InfoBox("Gegner verloren", "Dein Gegner hat das Spiel verlassen.");
+                        infoBox.showAndWait();
+                        sendCommand("GAMEOVERCONFIRM", "");
+                        this.leaveGame();
+                    });
+                    break;
+                case "GAMELOST":
+                    Platform.runLater(() -> {
+                        InfoBox infoBox = new InfoBox("Niederlage!", "Du hast das Spiel verloren.");
+                        Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
+                                myPointsCounter + " zu " + enemyPointsCounter + " verloren.");
+                        content.setWrapText(true);
+                        infoBox.add(content);
+                        infoBox.showAndWait();
+                        sendCommand("GAMEOVERCONFIRM", "");
+                    });
+                    break;
+                case "GAMEWON":
+                    Platform.runLater(() -> {
+                        InfoBox infoBox = new InfoBox("Sieg!", "Du hast das Spiel gewonnen!");
+                        Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
+                                myPointsCounter + " zu " + enemyPointsCounter + " gewonnen.");
+                        content.setWrapText(true);
+                        infoBox.add(content);
+                        infoBox.showAndWait();
+                        sendCommand("GAMEOVERCONFIRM", "");
+                        getScreenController().loadContent("/fxml/startpage.fxml");
+                    });
+                    break;
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
         }
     }
 
