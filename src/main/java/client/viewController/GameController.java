@@ -25,10 +25,9 @@ public class GameController extends ViewController {
     private CardPair[] pairs;
     private ArrayList<Card> cards;
     private Card firstCard, secondCard;
-    private boolean myTurn;
     private boolean firstCardPicked;
     private int myPointsCounter, enemyPointsCounter;
-    int rowCard1, colCard1, rowCard2, colCard2;
+    private int rowCard1, colCard1, rowCard2, colCard2;
 
     @Override
     public void setup(ScreenController screenController) {
@@ -52,99 +51,105 @@ public class GameController extends ViewController {
 
     @Override
     public void processCommand(String command, String[] parameters) {
-        if (command.equals("GAMEINIT")) {
-            XMLFileReader xmlReader = new XMLFileReader("/cards/cardpairs.xml");
-            this.pairs = xmlReader.getPairs();
-            Random random = new Random(Integer.parseInt(parameters[0]));
-            this.distributeCards(random);
-            Platform.runLater(() -> {
-                if(parameters[1].equals(getScreenController().getClient().getName())) {
-                    labelMyName.setText(parameters[1]);
-                    labelOpponentName.setText(parameters[2]);
-                } else {
-                    labelMyName.setText(parameters[2]);
-                    labelOpponentName.setText(parameters[1]);
-                }
-            });
-            this.sendCommand("GAMEINITCONFIRM", "");
-        } else if (command.equals("YOURTURN")) {
-            myTurn = true;
-            firstCardPicked = false;
-            this.firstCard = null;
-            this.secondCard = null;
-            this.coverCards();
-            for (Node child : playground.getChildren()) {
+        switch (command) {
+            case "GAMEINIT":
+                XMLFileReader xmlReader = new XMLFileReader("/cards/cardpairs.xml");
+                this.pairs = xmlReader.getPairs();
+                Random random = new Random(Integer.parseInt(parameters[0]));
+                this.distributeCards(random);
                 Platform.runLater(() -> {
-                    child.getStyleClass().clear();
-                    child.getStyleClass().add("coveredCard");
-                    if (child instanceof Button) {
-                        Button button = (Button) child;
-                        button.setDisable(false);
+                    if (parameters[1].equals(getScreenController().getClient().getName())) {
+                        labelMyName.setText(parameters[1]);
+                        labelOpponentName.setText(parameters[2]);
+                    } else {
+                        labelMyName.setText(parameters[2]);
+                        labelOpponentName.setText(parameters[1]);
                     }
                 });
-            }
-        } else if (command.equals("NOTYOURTURN")) {
-            this.firstCard = null;
-            this.secondCard = null;
-            for (Node child : playground.getChildren()) {
+                this.sendCommand("GAMEINITCONFIRM", "");
+                break;
+            case "YOURTURN":
+                firstCardPicked = false;
+                this.firstCard = null;
+                this.secondCard = null;
+                this.coverCards();
+                for (Node child : playground.getChildren()) {
+                    Platform.runLater(() -> {
+                        child.getStyleClass().clear();
+                        child.getStyleClass().add("coveredCard");
+                        if (child instanceof Button) {
+                            Button button = (Button) child;
+                            button.setDisable(false);
+                        }
+                    });
+                }
+                break;
+            case "NOTYOURTURN":
+                this.firstCard = null;
+                this.secondCard = null;
+                for (Node child : playground.getChildren()) {
+                    Platform.runLater(() -> {
+                        child.getStyleClass().clear();
+                        child.getStyleClass().add("disarmedCard");
+                    });
+                }
+                this.disableButtons();
+                this.coverCards();
+
+                break;
+            case "SHOWCARD":
+                int row = Integer.parseInt(parameters[0]);
+                int col = Integer.parseInt(parameters[1]);
+                int pos = Integer.parseInt(parameters[2]);
+                uncoverCard(row, col, pos);
+                break;
+            case "ENEMYSCORED":
+                enemyPointsCounter++;
                 Platform.runLater(() -> {
-                    child.getStyleClass().clear();
-                    child.getStyleClass().add("disarmedCard");
+                    enemyPoints.setText("Points: " + enemyPointsCounter);
+                    removeCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+                    removeCard(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
                 });
-            }
-            this.disableButtons();
-            this.coverCards();
-            myTurn = false;
-
-        } else if (command.equals("SHOWCARD")) {
-            int row = Integer.parseInt(parameters[0]);
-            int col = Integer.parseInt(parameters[1]);
-            int pos = Integer.parseInt(parameters[2]);
-            uncoverCard(row, col, pos);
-        } else if(command.equals("ENEMYSCORED")) {
-            enemyPointsCounter++;
-            Platform.runLater(() -> {
-                enemyPoints.setText("Points: " + enemyPointsCounter);
-                removeCard(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
-                removeCard(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
-            });
-        } else if(command.equals("ENEMYLEFT")) {
-            Platform.runLater(() -> {
-                System.out.println("Test");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Gegner verlässt das Spiel!");
-                alert.setContentText("Dein Gegner hat das Spiel verlassen!");
-                alert.showAndWait();
-                sendCommand("GAMEOVERCONFIRM", "");
-                this.leaveGame();
-            });
-        } else if(command.equals("GAMELOST")) {
-            Platform.runLater(() -> {
-                Stage stage = new Stage();
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Spiel verloren.");
-                alert.setContentText("Du hast das Spiel verloren.");
-                alert.showAndWait();
-                sendCommand("GAMEOVERCONFIRM", "");
-            });
-
-        } else if(command.equals("GAMEWON")) {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Spiel gewonnen!");
-                alert.setContentText("Du hast das Spiel gewonnen!");
-                alert.showAndWait();
-                sendCommand("GAMEOVERCONFIRM", "");
-                getScreenController().loadContent("/fxml/startpage.fxml");
-            });
+                break;
+            case "ENEMYLEFT":
+                Platform.runLater(() -> {
+                    System.out.println("Test");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Gegner verlässt das Spiel!");
+                    alert.setContentText("Dein Gegner hat das Spiel verlassen!");
+                    alert.showAndWait();
+                    sendCommand("GAMEOVERCONFIRM", "");
+                    this.leaveGame();
+                });
+                break;
+            case "GAMELOST":
+                Platform.runLater(() -> {
+                    Stage stage = new Stage();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Spiel verloren.");
+                    alert.setContentText("Du hast das Spiel verloren.");
+                    alert.showAndWait();
+                    sendCommand("GAMEOVERCONFIRM", "");
+                });
+                break;
+            case "GAMEWON":
+                Platform.runLater(() -> {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Spiel gewonnen!");
+                    alert.setContentText("Du hast das Spiel gewonnen!");
+                    alert.showAndWait();
+                    sendCommand("GAMEOVERCONFIRM", "");
+                    getScreenController().loadContent("/fxml/startpage.fxml");
+                });
+                break;
         }
     }
 
-    public void sendCommand(String command, String parameters) {
+    private void sendCommand(String command, String parameters) {
         this.getScreenController().getClient().sendCommand(command, parameters);
     }
 
-    public void disableButtons() {
+    private void disableButtons() {
         for (Node child : playground.getChildren()) {
             Platform.runLater(() -> {
                 if (child instanceof Button) {
@@ -155,7 +160,7 @@ public class GameController extends ViewController {
         }
     }
 
-    public Card uncoverCard(int row, int col, int position) {
+    private Card uncoverCard(int row, int col, int position) {
         Button button = (Button) playground.getChildren().get(position);
         Card pickedCard = fields[row][col].getCard();
         Platform.runLater(() -> {
@@ -170,7 +175,7 @@ public class GameController extends ViewController {
         return pickedCard;
     }
 
-    public void coverCards() {
+    private void coverCards() {
         for (Node node : playground.getChildren()) {
             Platform.runLater(() -> {
                 Button button = (Button) node;
@@ -179,7 +184,7 @@ public class GameController extends ViewController {
         }
     }
 
-    public void distributeCards(Random random) {
+    private void distributeCards(Random random) {
         for (CardPair cardPair : pairs) {
             cards.add(cardPair.getImageCard());
             cards.add(cardPair.getTextCard());
@@ -201,7 +206,7 @@ public class GameController extends ViewController {
         this.getScreenController().loadContent("/fxml/startpage.fxml");
     }
 
-    public void removeCard(int row, int col) {
+    private void removeCard(int row, int col) {
         fields[row][col].removeCard();
         Button button = fields[row][col].getButton();
         button.setDisable(true);
@@ -211,12 +216,12 @@ public class GameController extends ViewController {
         button.setGraphic(null);
     }
 
-    public void disabledButton(ActionEvent event) {
+    private void disabledButton(ActionEvent event) {
 
     }
 
 
-    public void handleButtonClick(ActionEvent event) {
+    private void handleButtonClick(ActionEvent event) {
         Button source = (Button) event.getSource();
         int counter = 0;
 

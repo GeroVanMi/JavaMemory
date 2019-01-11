@@ -12,7 +12,6 @@ public class Client implements Runnable {
     private Socket client;
     private PrintWriter writer;
     private ScreenController screenController;
-    private String ip;
 
     public Client(String name, ScreenController screenController, Socket client) {
         this.name = name;
@@ -39,9 +38,7 @@ public class Client implements Runnable {
                     if (arguments[0].equals("COMMAND")) {
                         // Figure out the parameters and put them into a separate array
                         String[] parameters = new String[arguments.length - 2];
-                        for (int i = 2; i < arguments.length; i++) {
-                            parameters[i - 2] = arguments[i];
-                        }
+                        System.arraycopy(arguments, 2, parameters, 0, arguments.length - 2);
                         screenController.processCommand(arguments[1], parameters);
                     }
 

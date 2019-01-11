@@ -1,6 +1,5 @@
 package client.model.cards;
 
-import client.model.cards.Card;
 import javafx.scene.control.Button;
 
 public class Field {

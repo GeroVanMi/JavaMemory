@@ -23,7 +23,7 @@ public class LoginViewController extends ViewController {
         }
     }
 
-    public boolean checkFields() {
+    private boolean checkFields() {
         boolean check = true;
         if(usernameField.getText().isEmpty()) {
             usernameField.setId("errorField");
@@ -37,7 +37,5 @@ public class LoginViewController extends ViewController {
     }
 
     @Override
-    public void processCommand(String command, String[] parameters) {
-
-    }
+    public void processCommand(String command, String[] parameters) {}
 }

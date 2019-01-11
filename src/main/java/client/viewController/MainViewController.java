@@ -5,12 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 public class MainViewController extends ViewController {
-
-    @FXML
-    private VBox statisticsVBox, onlineUsers;
 
     @FXML
     private Button gameButton;
@@ -38,7 +34,7 @@ public class MainViewController extends ViewController {
         }
     }
 
-    public void handleButtonCancel(ActionEvent event) {
+    private void handleButtonCancel(ActionEvent event) {
         this.getScreenController().getClient().sendCommand("CANCELLFG", "");
     }
 

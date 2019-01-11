@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-
+<?import java.net.URL?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.viewController.GameController">
    <center>
       <GridPane fx:id="playground" alignment="CENTER" hgap="5.0" maxHeight="1000.0" maxWidth="1150.0" prefHeight="300.0" prefWidth="400.0" vgap="5.0">
@@ -37,32 +32,32 @@
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="labelMyName" text="My Name">
-               <VBox.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin></Label>
-            <Label fx:id="myPoints" text="Points: 0 ">
-               <VBox.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin>
-            </Label>
-         </children></VBox>
+       <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <Label fx:id="labelMyName" text="My Name">
+              <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+              </VBox.margin>
+           </Label>
+           <Label fx:id="myPoints" text="Points: 0 ">
+              <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+              </VBox.margin>
+           </Label>
+       </VBox>
    </left>
    <right>
-      <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="labelOpponentName" text="Enemy Name">
-               <VBox.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin></Label>
-            <Label fx:id="enemyPoints" text="Points: 0 ">
-               <VBox.margin>
-                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-               </VBox.margin>
-            </Label>
-         </children></VBox>
+       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+           <Label fx:id="labelOpponentName" text="Enemy Name">
+              <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+              </VBox.margin>
+           </Label>
+           <Label fx:id="enemyPoints" text="Points: 0 ">
+              <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+              </VBox.margin>
+           </Label>
+       </VBox>
    </right>
    <stylesheets>
        <URL value="@../stylesheets/defaultStyles.css" />
