@@ -22,10 +22,10 @@ public class InfoBox {
 
     public InfoBox(String paneTitle, String title) {
         VBox root = new VBox();
-        root.setPrefSize(400, 200);
+        root.setPrefWidth(400);
         Label titleLabel = new Label(title);
         titleLabel.setFont(Font.font("arial", FontWeight.BOLD, 18));
-        titleLabel.setPadding(new Insets(15, 15, 15, 15));
+        titleLabel.setPadding(new Insets(15, 15, 20, 15));
 
         titleLabel.setPrefWidth(400);
         titleLabel.setWrapText(true);
@@ -33,8 +33,8 @@ public class InfoBox {
         root.setId("window");
 
         content = new VBox();
-        content.setPrefSize(400, 100);
-        content.setPadding(new Insets(15, 15, 15, 15));
+        content.setPrefWidth(400);
+        content.setPadding(new Insets(15, 15, 20, 15));
 
         root.getChildren().add(content);
 
@@ -44,7 +44,7 @@ public class InfoBox {
         button.setId("okButton");
         button.setFont(Font.font(16));
         HBox bottom = new HBox(button);
-        HBox.setMargin(button, new Insets(10, 10, 10, 10));
+        HBox.setMargin(button, new Insets(15, 15, 15, 15));
         bottom.setAlignment(Pos.CENTER_RIGHT);
         bottom.setPrefHeight(50);
         root.getChildren().add(bottom);

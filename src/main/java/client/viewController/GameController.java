@@ -113,11 +113,12 @@ public class GameController extends ViewController {
                 break;
             case "ENEMYLEFT":
                 Platform.runLater(() -> {
-                    System.out.println("Test");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Gegner verlässt das Spiel!");
                     alert.setContentText("Dein Gegner hat das Spiel verlassen!");
                     alert.showAndWait();
+                    InfoBox infoBox = new InfoBox("Gegner verloren", "Dein Gegner hat das Spiel verlassen.");
+                    infoBox.showAndWait();
                     sendCommand("GAMEOVERCONFIRM", "");
                     this.leaveGame();
                 });
@@ -134,10 +135,12 @@ public class GameController extends ViewController {
                 break;
             case "GAMEWON":
                 Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Spiel gewonnen!");
-                    alert.setContentText("Du hast das Spiel gewonnen!");
-                    alert.showAndWait();
+                    InfoBox infoBox = new InfoBox("Sieg!", "Du hast das Spiel gewonnen!");
+                    Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
+                            myPointsCounter + " zu " + enemyPointsCounter + " gewonnen.");
+                    content.setWrapText(true);
+                    infoBox.add(content);
+                    infoBox.showAndWait();
                     sendCommand("GAMEOVERCONFIRM", "");
                     getScreenController().loadContent("/fxml/startpage.fxml");
                 });
@@ -201,7 +204,6 @@ public class GameController extends ViewController {
     }
 
     public void leaveGame() {
-        System.out.println("Test");
         this.sendCommand("LEAVING", "");
         this.getScreenController().loadContent("/fxml/startpage.fxml");
     }
