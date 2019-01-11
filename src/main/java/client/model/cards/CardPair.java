@@ -11,10 +11,6 @@ public class CardPair {
         this.textCard = textCard;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public ImageCard getImageCard() {
         return imageCard;
     }

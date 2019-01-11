@@ -21,10 +21,6 @@ public class Field {
         return card;
     }
 
-    public boolean hasCard() {
-        return hasCard;
-    }
-
     public void removeCard() {
         this.hasCard = false;
     }

@@ -8,9 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -125,11 +124,12 @@ public class GameController extends ViewController {
                 break;
             case "GAMELOST":
                 Platform.runLater(() -> {
-                    Stage stage = new Stage();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Spiel verloren.");
-                    alert.setContentText("Du hast das Spiel verloren.");
-                    alert.showAndWait();
+                    InfoBox infoBox = new InfoBox("Niederlage!", "Du hast das Spiel verloren.");
+                    Label content = new Label("Du hast die Partie gegen " + labelOpponentName.getText() + " mit " +
+                            myPointsCounter + " zu " + enemyPointsCounter + " verloren.");
+                    content.setWrapText(true);
+                    infoBox.add(content);
+                    infoBox.showAndWait();
                     sendCommand("GAMEOVERCONFIRM", "");
                 });
                 break;
