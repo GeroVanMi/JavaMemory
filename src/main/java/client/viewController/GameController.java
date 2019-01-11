@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -107,26 +109,34 @@ public class GameController extends ViewController {
                 removeCard(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
             });
         } else if(command.equals("ENEMYLEFT")) {
-            System.out.println("Test");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Gegner verlässt das Spiel!");
-            alert.setContentText("Dein Gegner hat das Spiel verlassen!");
-            alert.showAndWait();
-            sendCommand("GAMEOVERCONFIRM", "");
-            this.leaveGame();
+            Platform.runLater(() -> {
+                System.out.println("Test");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Gegner verlässt das Spiel!");
+                alert.setContentText("Dein Gegner hat das Spiel verlassen!");
+                alert.showAndWait();
+                sendCommand("GAMEOVERCONFIRM", "");
+                this.leaveGame();
+            });
         } else if(command.equals("GAMELOST")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Spiel verloren.");
-            alert.setContentText("Du hast das Spiel verloren.");
-            alert.showAndWait();
-            sendCommand("GAMEOVERCONFIRM", "");
+            Platform.runLater(() -> {
+                Stage stage = new Stage();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Spiel verloren.");
+                alert.setContentText("Du hast das Spiel verloren.");
+                alert.showAndWait();
+                sendCommand("GAMEOVERCONFIRM", "");
+            });
+
         } else if(command.equals("GAMEWON")) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Spiel gewonnen!");
-            alert.setContentText("Du hast das Spiel gewonnen!");
-            alert.showAndWait();
-            sendCommand("GAMEOVERCONFIRM", "");
-            getScreenController().loadContent("/fxml/startpage.fxml");
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Spiel gewonnen!");
+                alert.setContentText("Du hast das Spiel gewonnen!");
+                alert.showAndWait();
+                sendCommand("GAMEOVERCONFIRM", "");
+                getScreenController().loadContent("/fxml/startpage.fxml");
+            });
         }
     }
 

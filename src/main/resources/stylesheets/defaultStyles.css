@@ -21,3 +21,9 @@
 .background .text-field {
     -fx-background-color: rgba(100, 100, 100, 0.8);
 }
+
+
+#errorField {
+    -fx-border-color: rgb(200, 30, 30);
+    -fx-border-width: 2px;
+}

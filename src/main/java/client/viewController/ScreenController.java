@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class ScreenController {
     // To be replaced with user object
@@ -36,8 +37,8 @@ public class ScreenController {
         }
     }
 
-    public void createClient(String name, String ip) {
-        client = new Client(name, this, ip);
+    public void createClient(String name, Socket socket) {
+        client = new Client(name, this, socket);
         Thread inputThread = new Thread(client);
         inputThread.start();
     }

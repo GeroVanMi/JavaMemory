@@ -3,6 +3,9 @@ package client.viewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+import java.net.Socket;
+
 public class LoginViewController extends ViewController {
 
     @FXML
@@ -10,10 +13,27 @@ public class LoginViewController extends ViewController {
 
     @FXML
     public void handleButtonLogin() {
-        if(!usernameField.getText().isEmpty()) {
-            this.getScreenController().createClient(usernameField.getText(), ipField.getText());
-            this.getScreenController().loadContent("/fxml/startpage.fxml");
+        if(checkFields()) {
+            try {
+                this.getScreenController().createClient(usernameField.getText(), new Socket(ipField.getText(), 5555));
+                this.getScreenController().loadContent("/fxml/startpage.fxml");
+            } catch (IOException e) {
+                this.ipField.setId("errorField");
+            }
         }
+    }
+
+    public boolean checkFields() {
+        boolean check = true;
+        if(usernameField.getText().isEmpty()) {
+            usernameField.setId("errorField");
+            check = false;
+        }
+        if(ipField.getText().isEmpty()) {
+            ipField.setId("errorField");
+            check = false;
+        }
+        return check;
     }
 
     @Override

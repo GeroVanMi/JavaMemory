@@ -14,19 +14,13 @@ public class Client implements Runnable {
     private ScreenController screenController;
     private String ip;
 
-    public Client(String name, ScreenController screenController, String ip) {
+    public Client(String name, ScreenController screenController, Socket client) {
         this.name = name;
         this.screenController = screenController;
-        this.ip = ip;
+        this.client = client;
     }
 
     public void run() {
-        try {
-            client = new Socket(ip, 5555);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         try {
             // opening Stream to write and read
             InputStream inputStream = client.getInputStream();
