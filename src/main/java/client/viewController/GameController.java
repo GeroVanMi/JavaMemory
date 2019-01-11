@@ -112,10 +112,6 @@ public class GameController extends ViewController {
                 break;
             case "ENEMYLEFT":
                 Platform.runLater(() -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Gegner verlässt das Spiel!");
-                    alert.setContentText("Dein Gegner hat das Spiel verlassen!");
-                    alert.showAndWait();
                     InfoBox infoBox = new InfoBox("Gegner verloren", "Dein Gegner hat das Spiel verlassen.");
                     infoBox.showAndWait();
                     sendCommand("GAMEOVERCONFIRM", "");

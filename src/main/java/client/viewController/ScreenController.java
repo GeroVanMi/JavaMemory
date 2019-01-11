@@ -2,6 +2,7 @@ package client.viewController;
 
 import client.model.Client;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,6 +55,8 @@ public class ScreenController {
     public void exit() {
         if(currentViewController instanceof GameController) {
             ((GameController) currentViewController).leaveGame();
+        } else if(currentViewController instanceof MainViewController) {
+            ((MainViewController) currentViewController).handleButtonCancel(null);
         }
     }
 

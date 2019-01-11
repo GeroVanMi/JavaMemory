@@ -34,7 +34,7 @@ public class MainViewController extends ViewController {
         }
     }
 
-    private void handleButtonCancel(ActionEvent event) {
+    public void handleButtonCancel(ActionEvent event) {
         this.getScreenController().getClient().sendCommand("CANCELLFG", "");
     }
 
