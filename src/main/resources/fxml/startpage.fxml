@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../stylesheets/defaultStyles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.viewController.MainViewController">
    <center>
-      <Button fx:id="gameButton" mnemonicParsing="false" onAction="#findGame" text="Find game" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="32.0" />
-         </font></Button>
-   </center>
-   <right>
-      <VBox fx:id="statisticsVBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <Label fx:id="usernameLabel">
-            <VBox.margin>
-               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
-            </VBox.margin>
-         </Label>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="usernameLabel">
+               <VBox.margin>
+                  <Insets bottom="50.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+            <Button fx:id="gameButton" focusTraversable="false" mnemonicParsing="false" onAction="#findGame" text="Find game">
+               <font>
+                  <Font size="64.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+               </VBox.margin>
+            </Button>
+         </children>
       </VBox>
-   </right>
-   <left>
-      <VBox fx:id="onlineUsers" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
+   </center>
 </BorderPane>

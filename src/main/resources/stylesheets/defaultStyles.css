@@ -31,3 +31,7 @@
     -fx-border-color: rgb(200, 30, 30);
     -fx-border-width: 2px;
 }
+
+#errorText {
+    -fx-text-fill: rgb(200, 30, 30);
+}

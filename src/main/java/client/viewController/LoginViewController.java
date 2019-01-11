@@ -10,6 +10,8 @@ public class LoginViewController extends ViewController {
 
     @FXML
     private TextField usernameField, ipField;
+    @FXML
+    private Label errorName, errorIP;
 
     @FXML
     public void handleButtonLogin() {
@@ -36,11 +38,23 @@ public class LoginViewController extends ViewController {
         boolean check = true;
         if(usernameField.getText().isEmpty()) {
             usernameField.setId("errorField");
+            errorName.setText("Bitte geben Sie einen Namen ein.");
             check = false;
+        } else if(usernameField.getText().toCharArray().length > 15) {
+            usernameField.setId("errorField");
+            errorName.setText("Bitte geben Sie einen Namen unter 15 Zeichen ein.");
+        } else {
+            errorName.setText("");
+            usernameField.setId("");
         }
         if(ipField.getText().isEmpty()) {
             ipField.setId("errorField");
+            errorIP.setText("Bitte geben Sie eine IP ein. Falls der Server auf Ihrem Rechner läuft, können Sie auch " +
+                    "\"localhost\" eingeben.");
             check = false;
+        } else {
+            errorIP.setText("");
+            ipField.setId("");
         }
         return check;
     }
